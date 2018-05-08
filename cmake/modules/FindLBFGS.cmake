@@ -1,0 +1,43 @@
+# - Try to find LBFGS
+# Once done this will define
+#
+#  LBFGS_FOUND			- system has LBFGS
+#  LBFGS_INCLUDE_DIR		- the LBFGS include directory
+#  LBFGS_LIBRARY		- link library to use LBFGS
+
+IF (LBFGS_INCLUDE_DIR)
+  #already in cache
+  SET(LBFGS_FIND_QUIETLY TRUE)
+ENDIF(LBFGS_INCLUDE_DIR)
+
+FIND_PATH(LBFGS_INCLUDE_DIR lbfgsb.h
+          PATHS /usr/include)
+FIND_LIBRARY(LBFGS_LIBRARY
+             NAMES lets_be_rational
+             PATHS /usr/lib64 /usr/lib)
+
+# handle the QUIETLY and REQUIRED arguments and set LBFGS_FOUND to TRUE if 
+# all listed variables are TRUE
+
+IF(LBFGS_INCLUDE_DIR AND LBFGS_LIBRARY)
+  SET(LBFGS_FOUND TRUE)
+ELSE(LBFGS_INCLUDE_DIR AND LBFGS_LIBRARY)
+  SET(LBFGS_FOUND FALSE)
+ENDIF(LBFGS_INCLUDE_DIR AND LBFGS_LIBRARY)
+
+INCLUDE(${CMAKE_ROOT}/Modules/FindPackageHandleStandardArgs.cmake)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(LBFGS DEFAULT_MSG LBFGS_LIBRARY LBFGS_INCLUDE_DIR)
+
+MARK_AS_ADVANCED(
+  LBFGS_LIBRARY
+  LBFGS_INCLUDE_DIR)
+set( LBFGS_INCLUDE_DIRS ${LBFGS_INCLUDE_DIR} )
+
+
+if( LBFGS_FOUND AND NOT TARGET LBFGS::lbfgs)
+  add_library( LBFGS::lbfgs UNKNOWN IMPORTED )
+  set_target_properties( LBFGS::lbfgs PROPERTIES
+      IMPORTED_LOCATION                 "${LBFGS_LIBRARY}"
+      INTERFACE_INCLUDE_DIRECTORIES     "${LBFGS_INCLUDE_DIRS}"
+      IMPORTED_LINK_INTERFACE_LANGUAGES "C" )
+endif()

@@ -7,12 +7,9 @@
 [submodule "cmake/c/zlib"]
 	path = cmake/c/zlib
 	url = https://github.com/madler/zlib.git
-[submodule "cmake/c/gsl"]
-	path = cmake/c/gsl
-	url = https://github.com/ampl/gsl.git
 [submodule "cmake/c/levmar"]
 	path = cmake/c/levmar
 	url = https://github.com/jturney/levmar.git
-[submodule "cmake/c/liblbfgs"]
-	path = cmake/c/liblbfgs
-	url = https://github.com/chokkan/liblbfgs.git
+[submodule "cmake/c/gsl"]
+	path = cmake/c/gsl
+	url = https://github.com/ampl/gsl.git
