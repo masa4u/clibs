@@ -1,0 +1,18 @@
+# Find CBLAS
+# CBLAS_INCLUDE_DIRS
+# CBLAS_LIBRARIES
+# CBLAS_FOUND
+
+find_path(CBLAS_INCLUDE_DIRS cblas.h)
+
+set(CBLAS_NAMES ${CBLAS_NAMES} blas)
+find_library(CBLAS_LIBRARY NAMES ${CBLAS_NAMES})
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(CBLAS DEFAULT_MSG CBLAS_LIBRARY CBLAS_INCLUDE_DIRS)
+
+if(CBLAS_FOUND)
+  set(CBLAS_LIBRARIES ${CBLAS_LIBRARY})
+endif(CBLAS_FOUND)
+
+mark_as_advanced(CBLAS_LIBRARY CBLAS_INCLUDE_DIRS)
