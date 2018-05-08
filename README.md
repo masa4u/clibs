@@ -1,4 +1,9 @@
+## init git repo automatically
+```
+git submodule init
 
+git submodule update --recursive --remote
+```
 ## c/cpp library for quant
 
  * c/c++ libraries
