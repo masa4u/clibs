@@ -9,6 +9,7 @@ find_package(F2C)
 include_directories(${F2C_INCLUDE_DIR})
 find_package(LBFGS)
 find_package(LetsBeRational)
+find_package(OpenSSL)
 
 message(STATUS "GSL ${GSL_FOUND}")
 if(GSL_FOUND)

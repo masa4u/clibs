@@ -1,4 +1,4 @@
-# check cmake required version
+# heck cmake required version
 cmake_minimum_required(VERSION 3.10)
 
 # Add some path to the cmake moduel search part
@@ -56,6 +56,9 @@ SET(BUILD_LEVMAR ON)
 SET(BUILD_CLAPACK ON)
 SET(BUILD_LETS_BE_RATIONAL ON)
 SET(BUILD_LBFGS ON)
+SET(BUILD_OPENSSL ON)
+SET(BUILD_OBJECT_LIBRARY_ONLY ON)
+
 
 #FIND_PACKAGE(BISON)
 #FIND_PACKAGE(FLEX)
