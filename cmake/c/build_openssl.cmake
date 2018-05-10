@@ -1,32 +1,34 @@
 IF(BUILD_OPENSSL)
-  SET(BUILD_OBJECT_LIBRARY_ONLY OFF)
   SET(OPENSSL_CRYPTO_LIBRARY "crypto.lib")
   SET(OPENSSL_LIBRARY "ssl.lib")
-  SET(OPENSSL_INCLUDE_DIR "${EXTENTION_C}")
-
-  include_directories("cmake/c")
+  SET(OPENSSL_INCLUDE_DIR "${CMAKE_BINARY_DIR}/cmake/c/openssl-build")
 
   IF(NOT EXISTS "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${OPENSSL_LIBRARY}")
-	  #include_directories ( BEFORE SYSTEM ${EXTENTION_C}/openssl/crypto ${EXTENTION_C}/openssl/ssl
-	  #    ${EXTENTION_C}/openssl ${EXTENTION_C} crypto .)
-    include_directories ( BEFORE SYSTEM 
-	  ${CMAKE_CURRENT_BINARY_DIR}/cmake/c/openssl/crypto 
-	  ${CMAKE_CURRENT_BINARY_DIR}/cmake/c/openssl/ssl 
-	  ${EXTENTION_C}/openssl/crypto ${EXTENTION_C}/openssl )
+      building_library("OpenSSL")
 
+      include(ExternalProject)
 
-    add_definitions( -DOPENSSL_NO_ASM )
+      ExternalProject_Add(openssl
+        URL "${CMAKE_CURRENT_SOURCE_DIR}/cmake/archive/OpenSSL-CMake-master.zip"
+	SOURCE_DIR cmake/c/openssl
+	BINARY_DIR cmake/c/openssl-build
+	CMAKE_ARGS
+	    -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}
+	    -DCMAKE_RUNTIME_OUTPUT_DIRECTORY:PATH=${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+	    -DCMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE:PATH=${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+	    -DCMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG:PATH=${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+            -DCMAKE_LIBRARY_OUTPUT_DIRECTORY:PATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
+	    -DCMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE:PATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
+	    -DCMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG:PATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
+            -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY:PATH=${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
+	    -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE:PATH=${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
+	    -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG:PATH=${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
 
-    if( WIN32 AND NOT CYGWIN )
-      add_definitions( -DOPENSSL_SYSNAME_WIN32 )
-      add_definitions( -DWIN32_LEAN_AND_MEAN )
-    endif ( )
-
-    building_library("OpenSSL")
-    #add_subdirectory(cmake/c/openssl)
-    add_subdirectory(cmake/c/openssl/crypto )
-    add_subdirectory(cmake/c/openssl/ssl )
-    file( COPY ${EXTENTION_C}/openssl/e_os2.h DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/openssl )
+	UPDATE_COMMAND ${CMAKE_COMMAND} -E copy ${EXTENTION_C}/openssl/CMakeLists.txt <SOURCE_DIR>/CMakeLists.txt &&
+		       ${CMAKE_COMMAND} -E copy ${EXTENTION_C}/openssl/ssl.cmake <SOURCE_DIR>/ssl/CMakeLists.txt  &&
+		       ${CMAKE_COMMAND} -E copy ${EXTENTION_C}/openssl/crypto.cmake <SOURCE_DIR>/crypto/CMakeLists.txt
+	INSTALL_COMMAND ""
+		)
 
   ENDIF(NOT EXISTS "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${OPENSSL_LIBRARY}")
 ENDIF(BUILD_OPENSSL)
