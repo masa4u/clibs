@@ -18,6 +18,8 @@ endmacro(building_library)
 list(APPEND CMAKE_MODULE_PATH
         "${CMAKE_CURRENT_LIST_DIR}/cmake"
         "${CMAKE_CURRENT_LIST_DIR}/cmake/c"
+	"${CMAKE_CURRENT_LIST_DIR}/cmake/cpp"
+	"${CMAKE_CURRENT_LIST_DIR}/cmake/cpp/restc-cpp/cmake_scripts"
         "${CMAKE_CURRENT_LIST_DIR}/cmake/c/clapack/INCLUDE"
         "${CMAKE_CURRENT_LIST_DIR}/build/lib"
         )
@@ -51,6 +53,7 @@ set(clibs_VERSION_MINOR 0)
 #option(BUILD_LEVMAR "build levmar" OFF)
 #option(BUILD_CLAPACK "build CLAPACK" OFF)
 
+## Extention: C
 SET(BUILD_GSL ON)
 SET(BUILD_LEVMAR ON)
 SET(BUILD_CLAPACK ON)
@@ -59,11 +62,18 @@ SET(BUILD_LBFGS ON)
 SET(BUILD_OPENSSL ON)
 SET(BUILD_ZLIB ON)
 
+## Extention: CPP
+SET(BOOST_ROOT "E:/fng/cpp-lib/boost_1_65_1")
+SET(BOOST_LIBRARYDIR "${BOOST_ROOT}/stage/win32/lib")
+SET(BUILD_RESTCCPP ON)
+
 
 #FIND_PACKAGE(BISON)
 #FIND_PACKAGE(FLEX)
 
 include("${EXTENTION_C}/CMakeLists.txt")
+include("${EXTENTION_CPP}/CMakeLists.txt")
+
 
 
 # ------------------------------------------------------
