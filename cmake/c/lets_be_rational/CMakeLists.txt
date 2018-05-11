@@ -10,3 +10,5 @@ endif(NOT WIN32)
 add_library(lets_be_rational
   ${_local_source} 
   )
+
+install(FILES lets_be_rational.h DESTINATION ${CMAKE_BINARY_DIR}/include)

@@ -5,6 +5,8 @@ IF(BUILD_LBFGS)
     if(NOT EXISTS "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${LBFGS_LIBRARY}")
         building_library("L-BFSGS-B")
         add_subdirectory(cmake/c/lbfgs)
+    else()
+      find_package(LBFGS REQUIRED)
     endif(NOT EXISTS "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${LBFGS_LIBRARY}")
 ENDIF(BUILD_LBFGS)
 
