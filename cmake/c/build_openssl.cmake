@@ -18,7 +18,6 @@ IF(BUILD_OPENSSL)
 		       ${CMAKE_COMMAND} -E copy ${EXTENTION_C}/openssl/ssl.cmake <SOURCE_DIR>/ssl/CMakeLists.txt  &&
 		       ${CMAKE_COMMAND} -E copy ${EXTENTION_C}/openssl/crypto.cmake <SOURCE_DIR>/crypto/CMakeLists.txt &&
 		       ${CMAKE_COMMAND} -E copy ${EXTENTION_C}/openssl/apps.cmake <SOURCE_DIR>/apps/CMakeLists.txt 
-	INSTALL_COMMAND ""
 		)
 
   ENDIF(NOT EXISTS "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${OPENSSL_LIBRARY}")

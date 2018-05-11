@@ -232,8 +232,8 @@ else()
     target_link_libraries( crypto ws2_32 crypt32 )
   endif()
 
-  install( DIRECTORY ${PROJECT_SOURCE_DIR}/include
-      DESTINATION ./ )
+  install( DIRECTORY ${PROJECT_BINARY_DIR}/crypto/openssl
+      DESTINATION ./include )
 
   install( TARGETS crypto
       RUNTIME DESTINATION bin

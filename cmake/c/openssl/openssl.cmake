@@ -27,7 +27,7 @@
 project( openssl )
 cmake_minimum_required( VERSION 2.8.3 )
 
-set(BUILD_OBJECT_LIBRARY_ONLY OFF BOOL)
+set(BUILD_OBJECT_LIBRARY_ONLY OFF)
 
 include_directories ( BEFORE SYSTEM ${CMAKE_CURRENT_BINARY_DIR}/crypto ${CMAKE_CURRENT_BINARY_DIR}/ssl crypto . ..)
 
