@@ -227,6 +227,10 @@ if(BUILD_OBJECT_LIBRARY_ONLY)
   file( COPY ${crypto_headers} DESTINATION openssl )
 else()
   add_library( crypto ${LIBSRC} ${OBJECTS_SRC} )
+  set( crypto_headers ${EXHEADERS} )
+  list( REMOVE_ITEM crypto_headers ./opensslconf.h )
+  file( COPY ${crypto_headers} DESTINATION openssl )
+
 
   if( WIN32 AND NOT CYGWIN )
     target_link_libraries( crypto ws2_32 crypt32 )

@@ -1,3 +1,7 @@
+
+[![Build Status](https://travis-ci.org/masa4u/clibs.svg?branch=master)](https://travis-ci.org/masa4u/clibs)
+[![Build Status/Window](https://ci.appveyor.com/api/projects/status/github/masa4u/clibs?branch=master&svg=true)](https://ci.appveyor.com/project/masa4u/clibs)
+
 ## init git repo automatically
 ```
 git submodule init

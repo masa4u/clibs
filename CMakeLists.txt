@@ -1,5 +1,5 @@
 # heck cmake required version
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.9.2)
 
 # Add some path to the cmake moduel search part
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} 
@@ -54,13 +54,10 @@ set(clibs_VERSION_MINOR 0)
 #option(BUILD_CLAPACK "build CLAPACK" OFF)
 
 ## Extention: C
-SET(BUILD_GSL ON)
-SET(BUILD_LEVMAR ON)
-SET(BUILD_CLAPACK ON)
-SET(BUILD_LETS_BE_RATIONAL ON)
-SET(BUILD_LBFGS ON)
-SET(BUILD_ZLIB ON)
-SET(BUILD_OPENSSL ON)
+SET(BUILD_TARGET GSL LEVMAR CLAPACK LETS_BE_RATIONAL LBFGS ZLIB OPENSSL)
+FOREACH(TARGET ${BUILD_TARGET})
+  SET(BUILD_${TARGET} ON)
+ENDFOREACH(TARGET)
 
 ## Extention: CPP
 SET(BOOST_ROOT "E:/fng/cpp-lib/boost_1_65_1")

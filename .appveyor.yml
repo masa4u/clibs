@@ -1,0 +1,11 @@
+skip_branch_with_pr: true
+image: Visual Studio 2015
+branches:
+  only:
+    - master
+configuration:
+  - Release
+
+build_script:
+  - cmake . -Bbuild
+  - cmake --build ./build --config Release
