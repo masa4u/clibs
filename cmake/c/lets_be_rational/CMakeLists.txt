@@ -4,7 +4,7 @@ file(GLOB _local_source
     )
 if(NOT WIN32)
     message(STATUS "remove xl addin function")
-    list(REMOVE_ITEM _local_source xlcall.cpp xlcall.h)
+    list(REMOVE_ITEM _local_source xlcall.cpp xlcall.h excel_registration.cpp)
 endif(NOT WIN32)
 
 add_library(lets_be_rational
