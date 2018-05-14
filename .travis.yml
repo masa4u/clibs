@@ -8,4 +8,21 @@ before_script:
  - cd build
  - cmake ..
 
-script: make && make install
+script: 
+ - make && make install
+
+after_success:
+ - echo SUCCESS
+ - cd build
+ - "tar -caf clibs_linux.tar.gz lib include"
+
+deply:
+  provider: releases
+  api_key:
+    secure:
+  file:
+    - build/clibs_linux.tar.gz
+  skip_cleanup: true
+  on:
+    repo:
+    targs: true
